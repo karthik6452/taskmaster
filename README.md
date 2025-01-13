@@ -8,7 +8,7 @@ This is a simple Spring Boot application.
 
 1. **Clone the repository:**
    ```bash
-   git clone <repository_url>
+   git clone [<repository_url>](https://github.com/nreddywellness360/taskmaster.git)
 Build the project:
 
 Bash
