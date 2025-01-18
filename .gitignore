@@ -10,3 +10,4 @@
 *.tar.gz
 .DS_Store
 *.bak
+".terraform/" 
