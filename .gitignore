@@ -1,0 +1,9 @@
+# Terraform-specific
+.terraform/
+*.tfstate
+*.tfstate.backup
+
+# Other
+*.log
+*.exe
+*.zip
