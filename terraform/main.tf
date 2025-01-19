@@ -128,24 +128,24 @@ resource "aws_iam_role_policy_attachment" "ecs_task_execution_policy" {
 resource "aws_ecs_task_definition" "app_task" {
   family                   = "taskmaster"
   container_definitions    = <<DEFINITION
-[
-  {
-    "name": "taskmaster-container",
-    "image": "${aws_ecr_repository.app_repo.repository_url}:latest",
-    "memory": 512,
-    "cpu": 256,
-    "essential": true,
-    "portMappings": [
-      {
-        "containerPort": 8080,
-        "hostPort": 8080
-      }
-    ]
-  }
-]
+[{
+  "name": "taskmaster-container",
+  "image": "${aws_ecr_repository.app_repo.repository_url}:latest",
+  "memory": 512,
+  "cpu": 256,
+  "essential": true,
+  "portMappings": [
+    {
+      "containerPort": 80,
+      "hostPort": 80
+    }
+  ]
+}]
 DEFINITION
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
+  memory                   = "1024"
+  cpu                      = "512"
   execution_role_arn       = aws_iam_role.ecs_task_execution.arn
   task_role_arn            = aws_iam_role.ecs_task_execution.arn
 }
@@ -161,6 +161,12 @@ resource "aws_ecs_service" "app_service" {
   network_configuration {
     subnets         = aws_subnet.public[*].id
     security_groups = [aws_security_group.ecs_sg.id]
+  }
+
+  load_balancer {
+    target_group_arn = aws_lb_target_group.ecs_tg.arn
+    container_name   = "taskmaster-container"
+    container_port   = 80
   }
 }
 
@@ -180,7 +186,7 @@ resource "aws_lb" "ecs_lb" {
 # Load Balancer Target Group
 resource "aws_lb_target_group" "ecs_tg" {
   name        = "ecs-tg"
-  port        = 8080
+  port        = 80
   protocol    = "HTTP"
   vpc_id      = aws_vpc.main.id
   target_type = "ip"
