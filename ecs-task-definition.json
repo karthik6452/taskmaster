@@ -2,13 +2,13 @@
   "family": "taskmaster-app",
   "requiresCompatibilities": ["FARGATE"],
   "networkMode": "awsvpc",
-  "cpu": "256", 
+  "cpu": "256",
   "memory": "512",
   "executionRoleArn": "arn:aws:iam::008971673921:role/ecsTaskExecutionRole",
   "containerDefinitions": [
     {
       "name": "taskmaster-container",
-      "image": "008971673921.dkr.ecr.us-east-1.amazonaws.com/taskmaster-app:f30f72b4b407913bcdc02b4e881a3c8b485be672",
+      "image": "008971673921.dkr.ecr.us-east-1.amazonaws.com/taskmaster-app:3f3fd790de7cddb664f9d3497fec094dd518c2a2",
       "portMappings": [
         {
           "containerPort": 8080,
