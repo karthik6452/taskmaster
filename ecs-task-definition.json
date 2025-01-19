@@ -1,5 +1,9 @@
 {
     "family": "taskmaster-app",
+    "requiresCompatibilities": ["FARGATE"],
+    "networkMode": "awsvpc",
+    "cpu": "256",
+    "memory": "512",
     "containerDefinitions": [
       {
         "name": "taskmaster-container",
@@ -20,6 +24,7 @@
           }
         ]
       }
-    ]
+    ],
+    "executionRoleArn": "arn:aws:iam::008971673921:role/ecsTaskExecutionRole"
   }
   
