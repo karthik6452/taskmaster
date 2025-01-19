@@ -1,25 +1,26 @@
 {
-    "family": "taskmaster-app",
-    "containerDefinitions": [
-      {
-        "name": "taskmaster-container",
-        "image": "008971673921.dkr.ecr.us-east-1.amazonaws.com/taskmaster-app:${GITHUB_SHA}",
-        "memory": 512,
-        "cpu": 256,
-        "portMappings": [
-          {
-            "containerPort": 8080,
-            "hostPort": 8080
-          }
-        ],
-        "essential": true,
-        "environment": [
-          {
-            "name": "SPRING_PROFILES_ACTIVE",
-            "value": "prod"
-          }
-        ]
-      }
-    ]
-  }
-  
+  "family": "taskmaster-app",
+  "requiresCompatibilities": ["FARGATE"],
+  "networkMode": "awsvpc",
+  "cpu": "256", 
+  "memory": "512",
+  "containerDefinitions": [
+    {
+      "name": "taskmaster-container",
+      "image": "008971673921.dkr.ecr.us-east-1.amazonaws.com/taskmaster-app:f30f72b4b407913bcdc02b4e881a3c8b485be672",
+      "portMappings": [
+        {
+          "containerPort": 8080,
+          "hostPort": 8080
+        }
+      ],
+      "essential": true,
+      "environment": [
+        {
+          "name": "SPRING_PROFILES_ACTIVE",
+          "value": "prod"
+        }
+      ]
+    }
+  ]
+}
