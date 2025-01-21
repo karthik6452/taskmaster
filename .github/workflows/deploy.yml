@@ -47,6 +47,12 @@ jobs:
       - name: Render ECS Task Definition
         id: render-task-def
         run: |
+          # Check if the ECS task definition template file exists
+          if [ ! -f ecs-task-definition-template.json ]; then
+            echo "Error: ecs-task-definition-template.json not found!"
+            exit 1
+          fi
+          # Replace <IMAGE> placeholder in the template with the actual image
           sed "s|<IMAGE>|${{ steps.login-ecr.outputs.registry }}/${{ secrets.ECR_REPOSITORY }}:${{ env.IMAGE_TAG }}|g" ecs-task-definition-template.json > ecs-task-definition.json
 
       # Step 7: List files for debugging
