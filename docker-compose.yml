@@ -8,11 +8,26 @@ services:
       SPRING_PROFILES_ACTIVE: prod
     depends_on:
       - database
-
+  
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+  
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3100:3000"
+  
   database:
     image: mysql:8.0
+    container_name: database
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: taskmaster
     ports:
-      - "3306:3306"
+      - "3307:3307"
