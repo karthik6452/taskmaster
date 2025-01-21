@@ -43,13 +43,17 @@ jobs:
           docker tag ${{ secrets.ECR_REPOSITORY }}:${{ env.IMAGE_TAG }} ${{ steps.login-ecr.outputs.registry }}/${{ secrets.ECR_REPOSITORY }}:${{ env.IMAGE_TAG }}
           docker push ${{ steps.login-ecr.outputs.registry }}/${{ secrets.ECR_REPOSITORY }}:${{ env.IMAGE_TAG }}
 
-      # Step 6: Update ECS Task Definition
+      # Step 6: Render ECS Task Definition
       - name: Render ECS Task Definition
         id: render-task-def
         run: |
           sed "s|<IMAGE>|${{ steps.login-ecr.outputs.registry }}/${{ secrets.ECR_REPOSITORY }}:${{ env.IMAGE_TAG }}|g" ecs-task-definition-template.json > ecs-task-definition.json
 
-      # Step 7: Deploy to ECS
+      # Step 7: List files for debugging
+      - name: List files
+        run: ls -la
+
+      # Step 8: Deploy to ECS
       - name: Deploy to Amazon ECS
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
