@@ -4,14 +4,15 @@ provider "aws" {
 
 # VPC
 resource "aws_vpc" "main" {
-  cidr_block           = var.vpc_cidr_block
-  enable_dns_support   = true
+  cidr_block = var.vpc_cidr_block
+  enable_dns_support = true
   enable_dns_hostnames = true
 
   tags = {
     Name = "ecs-vpc"
   }
 }
+
 
 # Data for availability zones
 data "aws_availability_zones" "available" {
@@ -204,3 +205,5 @@ resource "aws_lb_listener" "http_listener" {
     target_group_arn = aws_lb_target_group.ecs_tg.arn
   }
 }
+
+
