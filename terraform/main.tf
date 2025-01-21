@@ -18,7 +18,7 @@ data "aws_availability_zones" "available" {
   state = "available"
 }
 
-# Subnets
+# Public Subnets
 resource "aws_subnet" "public" {
   count                   = 2
   vpc_id                  = aws_vpc.main.id
@@ -40,7 +40,7 @@ resource "aws_internet_gateway" "igw" {
   }
 }
 
-# Route Table
+# Route Table for Public Subnets
 resource "aws_route_table" "public" {
   vpc_id = aws_vpc.main.id
 
@@ -161,6 +161,7 @@ resource "aws_ecs_service" "app_service" {
   network_configuration {
     subnets         = aws_subnet.public[*].id
     security_groups = [aws_security_group.ecs_sg.id]
+    assign_public_ip = true
   }
 
   load_balancer {
