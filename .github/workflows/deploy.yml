@@ -47,7 +47,7 @@ jobs:
       - name: Render ECS Task Definition
         id: render-task-def
         run: |
-          sed "s|<IMAGE>|${{ steps.login-ecr.outputs.registry }}/${{ secrets.ECR_REPOSITORY }}:${{ env.IMAGE_TAG }}|g" ecs-task-definition-template.json > ecs-task-definition.json
+          sed "s|<IMAGE>|${{ steps.login-ecr.outputs.registry }}/${{ secrets.ECR_REPOSITORY }}:${{ env.IMAGE_TAG }}|g" ecs-task-definition.json > ecs-task-definition.json
 
       # Step 7: List files for debugging
       - name: List files
