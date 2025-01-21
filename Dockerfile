@@ -21,7 +21,7 @@ WORKDIR /app
 COPY --from=build /app/target/taskmaster-0.0.1-SNAPSHOT.jar app.jar
 
 # Expose the port your application runs on (default for Spring Boot is 8080)
-EXPOSE 8080
+EXPOSE 80
 
 # Define the command to run the application
 ENTRYPOINT ["java", "-jar", "app.jar"]
