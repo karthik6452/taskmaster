@@ -33,10 +33,6 @@ License:
 
 This project is licensed under the [License Name] - see the [LICENSE] file for details.
 
-Contact:
-
-Nagesh [nreddy@wellness360.co]
-
 **Explanation:**
 
 * **Header:** A descriptive title for your application.
