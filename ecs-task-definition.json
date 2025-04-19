@@ -33,5 +33,5 @@
       }
     }
   ],
-  "executionRoleArn": "arn:aws:iam::008971673921:role/ecsTaskExecutionRole"
+  "executionRoleArn": "arn:aws:ecs:us-east-1:452585780107:task-definition/taskmaster:1"
 }
