@@ -31,8 +31,9 @@ Push your changes to your fork.
 5. Create a pull request.   
 License:
 
-This project is licensed under the [License Name] - see the [LICENSE] file for details.
+This project is licensed under the [Karthik Rushi] - see the [LICENSE] file for details.
 
+Contact:
 **Explanation:**
 
 * **Header:** A descriptive title for your application.
